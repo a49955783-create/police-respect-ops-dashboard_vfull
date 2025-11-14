@@ -2,10 +2,6 @@
 :root{--bg:#061025;--card:#071726;--accent:#2ea043;--muted:#9fb0c6;--input:#0f1b22}
 *{box-sizing:border-box;font-family:'Tajawal',sans-serif}
 html,body{height:100%;margin:0;background:linear-gradient(180deg,var(--bg),#02050a);color:#e6eef3;direction:rtl}
-.intro-screen{position:fixed;inset:0;display:flex;align-items:center;justify-content:center;z-index:9999;background:linear-gradient(180deg,rgba(2,8,20,.6),rgba(2,8,20,.6))}
-.intro-card{background:linear-gradient(135deg,#042233,#043047);padding:28px;border-radius:12px;text-align:center;box-shadow:0 12px 40px rgba(3,7,18,.6)}
-.intro-title{font-size:30px;color:#bfe8ff;font-weight:800}
-.intro-sub{margin-top:6px;color:#bcdff0;font-size:15px}
 .topbar{background:linear-gradient(90deg,#042033,#043047);padding:14px 20px;box-shadow:0 6px 18px rgba(0,0,0,.6)}
 .topbar .brand{font-weight:700;color:#bfe8ff;font-size:18px}
 .container{max-width:1100px;margin:18px auto;padding:14px;background:var(--card);border-radius:12px;box-shadow:0 8px 30px rgba(0,0,0,.6)}

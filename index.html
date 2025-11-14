@@ -1,0 +1,158 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width,initial-scale=1"/>
+  <title>شرطة ريسبكت — تحديث مركز العمليات</title>
+  <link href="https://fonts.googleapis.com/css2?family=Tajawal:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Intro -->
+  <div id="intro" class="intro-screen">
+    <div class="intro-card">
+      <div class="intro-title">شرطة ريسبكت</div>
+      <div class="intro-sub">تحديث مركز العمليات للشرطة</div>
+      <button id="enterBtn" class="btn primary">ادخل</button>
+    </div>
+  </div>
+
+  <header class="topbar" id="topbar" style="display:none;">
+    <div class="brand">تحديث مركز العمليات للشرطة</div>
+  </header>
+
+  <main id="main" class="container" style="display:none;opacity:0;">
+    <!-- عمليات -->
+    <section class="form-top">
+      <div class="row inputs-row">
+        <label>اسم العمليات (الاسم + الكود)</label>
+        <div class="inline">
+          <input id="opsName" class="input small" placeholder="اسم العمليات">
+          <input id="opsCode" class="input small" placeholder="كود العمليات">
+        </div>
+      </div>
+
+      <div class="row inputs-row">
+        <label>نائب مركز العمليات (الاسم + الكود)</label>
+        <div class="inline">
+          <input id="opsDeputy" class="input small" placeholder="اسم النائب">
+          <input id="opsDeputyCode" class="input small" placeholder="كود النائب">
+        </div>
+      </div>
+
+      <!-- القيادات / الضباط / مسؤول الفترة / ضباط الصف -->
+      <div class="groups-wrap">
+        <div class="group-col">
+          <h4>القيادات (كود)</h4>
+          <div id="leadersPills" class="pills-wrap"></div>
+          <div class="inline"><input id="leaderInput" class="input" placeholder="كود القيادة"><button id="addLeader" class="btn primary">أضف</button></div>
+        </div>
+
+        <div class="group-col">
+          <h4>الضباط (كود)</h4>
+          <div id="officersPills" class="pills-wrap"></div>
+          <div class="inline"><input id="officerInput" class="input" placeholder="كود الضابط"><button id="addOfficer" class="btn primary">أضف</button></div>
+        </div>
+
+        <div class="group-col">
+          <h4>مسؤول الفترة (الاسم + الكود)</h4>
+          <div id="managersPills" class="pills-wrap"></div>
+          <div class="inline"><input id="managerName" class="input" placeholder="الاسم"><input id="managerCode" class="input small" placeholder="الكود"><button id="addManager" class="btn primary">أضف مسؤول</button></div>
+        </div>
+
+        <div class="group-col">
+          <h4>ضباط الصف (الاسم + كود)</h4>
+          <div id="ncosPills" class="pills-wrap"></div>
+          <div class="inline"><input id="ncoName" class="input" placeholder="الاسم"><input id="ncoCode" class="input small" placeholder="كود"><button id="addNco" class="btn primary">أضف</button></div>
+        </div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- رفع صورة + خيارات OCR -->
+    <section class="controls">
+      <div class="left-controls">
+        <button id="addUnit" class="btn primary">+ إضافة وحدة جديدة</button>
+        <button id="clearUnits" class="btn muted">مسح الكل</button>
+        <button id="startTime" class="btn muted">تسجيل وقت الاستلام</button>
+        <button id="endTime" class="btn muted">تسجيل وقت التسليم</button>
+      </div>
+
+      <div class="right-controls">
+        <label class="file-label">رفع/لصق صورة لاستخراج الأكواد (WebP, JPG, PNG):</label>
+        <input id="fileInput" type="file" accept="image/png,image/jpeg,image/webp" class="file-input">
+        <select id="ocrMode" class="input mode-select" title="وضع التوزيع">
+          <option value="replace">استبدال</option>
+          <option value="merge">دمج (أضف كسطر)</option>
+        </select>
+        <button id="pasteHint" class="btn muted">Ctrl+V للصق</button>
+      </div>
+
+      <div class="note">يفضل رفع/لصق صورة عالية الجودة. أحيانًا ستحتاج لتعديل النتائج يدويًا قبل الإرسال.</div>
+
+      <div id="previewWrap" class="preview-wrap" style="display:none">
+        <img id="previewImg" src="" alt="preview">
+        <div class="progress-wrap"><div id="progressBar" style="width:0%"></div></div>
+        <div id="progressText" class="progress-text"></div>
+      </div>
+    </section>
+
+    <hr>
+
+    <!-- قائمة الوحدات -->
+    <section class="units-section">
+      <div id="unitsList" class="units-list"></div>
+    </section>
+
+    <hr>
+
+    <!-- النتيجة النهائية -->
+    <section class="result-section">
+      <div class="result-actions">
+        <button id="copyResult" class="btn primary">نسخ</button>
+      </div>
+      <label>النتيجة النهائية (قابلة للتحرير)</label>
+      <div id="resultArea" class="result-area" contenteditable="true"></div>
+    </section>
+  </main>
+
+  <!-- modal تعديل -->
+  <div id="modal" class="modal" aria-hidden="true">
+    <div class="modal-card">
+      <div class="modal-top"><h3>تعديل الوحدة</h3><button id="modalClose" class="btn muted">✖</button></div>
+      <div class="modal-body">
+        <label>الكود</label><input id="m_code" class="input">
+        <label>الحالة</label>
+        <select id="m_status" class="input">
+          <option>في الخدمة</option>
+          <option>مشغول</option>
+          <option>مشغول - اختبار</option>
+          <option>مشغول - تدريب</option>
+          <option>مشغول حالة موجه 10</option>
+        </select>
+        <label>الموقع</label>
+        <select id="m_loc" class="input">
+          <option>لا شي</option><option>الشمال</option><option>الوسط</option><option>الشرق</option><option>الجنوب</option><option>ساندي</option><option>بوليتو</option>
+        </select>
+        <label>توزيع الوحدات</label><input id="m_dist" class="input">
+        <label>النوع</label>
+        <select id="m_type" class="input">
+          <option>لا شي</option><option>سبيد يونت</option><option>دباب</option><option>الهلي</option>
+        </select>
+        <div id="m_speed_wrap" style="display:none">
+          <label>اختيار سبيد يونت</label>
+          <select id="m_speed" class="input"><option></option><option>فايبكس</option><option>موتركس</option></select>
+        </div>
+      </div>
+      <div class="modal-actions"><button id="modalSave" class="btn primary">حفظ</button><button id="modalCancel" class="btn muted">إلغاء</button></div>
+    </div>
+  </div>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
+
+  <!-- local tesseract should be placed in /libs/tesseract.min.js -->
+  <script src="./libs/tesseract.min.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>

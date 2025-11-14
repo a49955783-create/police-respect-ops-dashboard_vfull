@@ -80,7 +80,7 @@ $('modalSave').addEventListener('click', ()=>{ if(!modalRow) return closeModal()
 function closeModal(){ $('modal').setAttribute('aria-hidden','true'); modalRow = null; }
 
 // paste handling (Ctrl+V)
-document.addEventListener('paste', async (e)=>{ if(!e.clipboardData) return; for(const item of e.clipboardData.items){ if(item.type.indexOf('image')!==-1){ const f=item.getAsFile(); if(f) await handleFile(f); } } });
+document.addEventListener('paste', async (e)=>{ if(!e.clipboardData) return; for(const item of e.clipboardData.items){ if(item.type.indexOf('image')!==-1){ const f=item.getAsFile(); if(f) await handleFile(f); } } } );
 fileInput.addEventListener('change', async (e)=>{ const f=e.target.files[0]; if(!f) return; await handleFile(f); fileInput.value=''; });
 
 // time buttons
@@ -119,9 +119,6 @@ function updateResult(){
 
 // copy result
 $('copyResult').addEventListener('click', ()=>{ navigator.clipboard.writeText(resultArea.innerText).then(()=> showToast('تم نسخ النتيجة',1500)).catch(()=> showToast('فشل النسخ',1500)); });
-
-// enter intro
-$('enterBtn').addEventListener('click', ()=>{ $('intro').style.display='none'; $('topbar').style.display='block'; $('main').style.display='block'; setTimeout(()=> $('main').style.opacity=1,20); });
 
 // initial
 updateResult();

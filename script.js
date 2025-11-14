@@ -9,8 +9,8 @@ const progressBar = $('progressBar');
 const progressText = $('progressText');
 const resultArea = $('resultArea');
 const toast = $('toast');
-const startTimeBtn = $('startTime');
-const endTimeBtn = $('endTime');
+const startTimeBtn = $('startTime'); // ⬅️ هذا زر تسجيل وقت الاستلام
+const endTimeBtn = $('endTime');     // ⬅️ هذا زر تسجيل وقت التسليم
 const pasteHint = $('pasteHint');
 
 let leadersArr = [], officersArr = [], managers = [], ncosArr = [];
@@ -58,7 +58,7 @@ function createUnit(data={code:'',status:'في الخدمة',loc:'لا شي',dis
 
   row.querySelector('.delete-btn').addEventListener('click', ()=>{ row.remove(); updateResult(); showToast('تم الحذف'); });
   row.querySelector('.add-partner-btn').addEventListener('click', ()=>{ const p=prompt('أدخل كود الشريك'); if(p){ const codeInput=row.querySelector('.code-input'); codeInput.value = codeInput.value ? codeInput.value + ' + ' + p : p; updateResult(); showToast('تم إضافة شريك'); } });
-  row.querySelector('.edit-btn').addEventListener('click', ()=> openModalForRow(row));
+  row.querySelector('.edit-btn').addEventListener('click', ()=> openModalForRow(row)); // ⬅️ هذا زر تعديل
   row.querySelector('.type-input').addEventListener('change', (e)=>{ if(e.target.value==='سبيد يونت'){ row.querySelector('.speed-wrap').style.display='block'; } else { row.querySelector('.speed-wrap').style.display='none'; row.querySelector('.speed-input').value=''; } updateResult(); });
   row.querySelectorAll('input, select').forEach(inp=> inp.addEventListener('input', ()=> updateResult()));
   unitsList.appendChild(row);
@@ -69,7 +69,7 @@ function createUnit(data={code:'',status:'في الخدمة',loc:'لا شي',dis
 createUnit();
 
 // controls
-$('addUnit').addEventListener('click', ()=>{ createUnit(); showToast('تم إضافة وحدة'); updateResult(); });
+$('addUnit').addEventListener('click', ()=>{ createUnit(); showToast('تم إضافة وحدة'); updateResult(); }); // ⬅️ هذا زر إضافة وحدة
 $('clearUnits').addEventListener('click', ()=>{ if(confirm('مسح كل الوحدات؟')){ unitsList.innerHTML=''; updateResult(); showToast('تم المسح'); } });
 
 // modal functions
@@ -118,7 +118,7 @@ function updateResult(){
 }
 
 // copy result
-$('copyResult').addEventListener('click', ()=>{ navigator.clipboard.writeText(resultArea.innerText).then(()=> showToast('تم نسخ النتيجة',1500)).catch(()=> showToast('فشل النسخ',1500)); });
+$('copyResult').addEventListener('click', ()=>{ navigator.clipboard.writeText(resultArea.innerText).then(()=> showToast('تم نسخ النتيجة',1500)).catch(()=> showToast('فشل النسخ',1500)); }); // ⬅️ هذا زر نسخ النتيجة
 
 // initial
 updateResult();

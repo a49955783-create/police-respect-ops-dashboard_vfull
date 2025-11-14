@@ -8,21 +8,12 @@
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <!-- Intro -->
-  <div id="intro" class="intro-screen">
-    <div class="intro-card">
-      <div class="intro-title">شرطة ريسبكت</div>
-      <div class="intro-sub">تحديث مركز العمليات للشرطة</div>
-      <button id="enterBtn" class="btn primary">ادخل</button>
-    </div>
-  </div>
-
-  <header class="topbar" id="topbar" style="display:none;">
+  
+  <header class="topbar" id="topbar">
     <div class="brand">تحديث مركز العمليات للشرطة</div>
   </header>
 
-  <main id="main" class="container" style="display:none;opacity:0;">
-    <!-- عمليات -->
+  <main id="main" class="container">
     <section class="form-top">
       <div class="row inputs-row">
         <label>اسم العمليات (الاسم + الكود)</label>
@@ -40,7 +31,6 @@
         </div>
       </div>
 
-      <!-- القيادات / الضباط / مسؤول الفترة / ضباط الصف -->
       <div class="groups-wrap">
         <div class="group-col">
           <h4>القيادات (كود)</h4>
@@ -70,7 +60,6 @@
 
     <hr>
 
-    <!-- رفع صورة + خيارات OCR -->
     <section class="controls">
       <div class="left-controls">
         <button id="addUnit" class="btn primary">+ إضافة وحدة جديدة</button>
@@ -100,14 +89,12 @@
 
     <hr>
 
-    <!-- قائمة الوحدات -->
     <section class="units-section">
       <div id="unitsList" class="units-list"></div>
     </section>
 
     <hr>
 
-    <!-- النتيجة النهائية -->
     <section class="result-section">
       <div class="result-actions">
         <button id="copyResult" class="btn primary">نسخ</button>
@@ -117,7 +104,6 @@
     </section>
   </main>
 
-  <!-- modal تعديل -->
   <div id="modal" class="modal" aria-hidden="true">
     <div class="modal-card">
       <div class="modal-top"><h3>تعديل الوحدة</h3><button id="modalClose" class="btn muted">✖</button></div>
@@ -151,7 +137,6 @@
 
   <div id="toast" class="toast" aria-live="polite"></div>
 
-  <!-- local tesseract should be placed in /libs/tesseract.min.js -->
   <script src="./libs/tesseract.min.js"></script>
   <script src="script.js"></script>
 </body>
